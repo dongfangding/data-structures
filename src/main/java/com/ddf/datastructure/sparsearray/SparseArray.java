@@ -1,9 +1,17 @@
-package com.ddf.datastructure;
+package com.ddf.datastructure.sparsearray;
 
 import java.util.Random;
 
 /**
  * 稀疏数组
+ *
+ * 当一个数组中大部分元素为0，或者为同一个值的数组时，可以使用稀疏数组来保存该数组。
+ *
+ * 稀疏数组的处理方法是:
+ * 记录数组一共有几行几列，有多少个不同的值
+ * 把具有不同值的元素的行列及值记录在一个小规模的数组中，从而缩小程序的规模
+ *
+ *
  *
  * @author dongfang.ding
  * @date 2019/6/11 14:01
