@@ -10,7 +10,8 @@
 #### 1. 稀疏数组
 稀疏数组源码中的转换与还原的过程中，视频中数组大小是按照定义时的硬编码来做的，因此做了修改，尽量将转换与还原抽象出来，
 只传入原二维数组即可；本来想把数组做成泛型的，但语法不支持new 泛型；
-`com.ddf.datastructure.queue.ArrayQueueDemo`
+
+`com.ddf.datastructure.sparsearray.SparseArray`
 ```java
 /**
  * 稀疏数组
@@ -46,7 +47,8 @@
 #### 2. 队列
 ##### 2.1 数组实现队列
 原视频中实现的数组队列为了实现对数组的循环使用，算法过于复杂和难以理解，因此这部分参考了java自身实现的源码，写了更加精简版的实现
-`com.ddf.datastructure.sparsearray.SparseArray`
+
+`com.ddf.datastructure.queue.ArrayQueueDemo`
 ```java
 /**
  * 使用数组实现队列
