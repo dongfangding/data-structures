@@ -2,6 +2,7 @@ package com.ddf.datastructure.linkedlist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
@@ -31,7 +32,23 @@ public class LinkedListDemo {
         System.out.println("获得指定角标的元素1: [" + linkedList.get(1) + "]");
         System.out.println("获得指定角标的元素2: [" + linkedList.get(2) + "]");
         System.out.println("获得指定角标的元素3: [" + linkedList.get(3) + "]");
+        int temp = random.nextInt(5000);
+        System.out.println("向[0]位加入元素： [" + temp + "]");
+        linkedList.add(0, temp);
+        temp = random.nextInt(5000);
+        System.out.println("向[3]位加入元素： [" + temp + "]");
+        linkedList.add(3, temp);
+        System.out.println("加入后链表元素");
+        System.out.println(linkedList);
 
+        System.out.println("移除头元素: [" + linkedList.remove() + "]");
+        System.out.println(linkedList);
+        System.out.println("移除头元素: [" + linkedList.remove() + "]");
+        System.out.println(linkedList);
+        System.out.println("移除头元素: [" + linkedList.remove() + "]");
+        System.out.println(linkedList);
+        System.out.println("移除头元素: [" + linkedList.remove() + "]");
+        System.out.println(linkedList);
     }
 }
 
@@ -65,6 +82,28 @@ class SimpleLinkedList<E> {
         return true;
     }
 
+
+    public boolean add(int index, E e) {
+        if (index == size) {
+            return add(e);
+        }
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<E> node = node(index);
+        Node<E> oldPre = node.pre;
+        Node<E> newNode = new Node<>(oldPre, e, node);
+        if (oldPre == null) {
+            first = newNode;
+        } else {
+            oldPre.next = newNode;
+        }
+        node.pre = newNode;
+        size ++;
+        return true;
+    }
+
     /**
      * 获得指定插入顺序的元素，
      * 链表与数组这里的区别就很明显了，数组可以直接通过角标访问，而链表只能通过头节点遍历指定的index的次数;
@@ -85,6 +124,16 @@ class SimpleLinkedList<E> {
         // 而如果我们从尾部开始循环的话，则只需要循环两次;所以可以简单的判断下当前角标在中间元素的左边还是右边，如果是左边，则从头
         // 开始循环，而如果在右边，则从尾部循环；
 
+        //
+        return node(index).item;
+    }
+
+    /**
+     * 获得指定位置的节点
+     * @param index
+     * @return
+     */
+    private Node<E> node(int index) {
         // 首先判断当前角标位于二分的左边还是右边
         if (index < (size >> 1)) {
             // 如果角标小于一半，则从头开始循环
@@ -92,15 +141,34 @@ class SimpleLinkedList<E> {
             for (int i = 0; i < index; i ++) {
                 node = node.next;
             }
-            return node.item;
+            return node;
         } else {
             // 如果角标大于总长度的一半，则从尾部开始循环
             Node<E> node = last;
             for (int i = size - 1; i > index; i --) {
                 node = node.pre;
             }
-            return node.item;
+            return node;
         }
+    }
+
+    /**
+     * 移除头节点
+     */
+    public E remove() {
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
+        final Node<E> node = first;
+        Node<E> oldNext = node.next;
+        if (oldNext != null) {
+            first = oldNext;
+            oldNext.pre = null;
+        } else {
+            first = null;
+        }
+        size --;
+        return node.item;
     }
 
     /**
