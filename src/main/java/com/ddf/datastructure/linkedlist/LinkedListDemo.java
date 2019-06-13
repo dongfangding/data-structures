@@ -82,7 +82,12 @@ class SimpleLinkedList<E> {
         return true;
     }
 
-
+    /**
+     * 向指定位置加入元素
+     * @param index
+     * @param e
+     * @return
+     */
     public boolean add(int index, E e) {
         if (index == size) {
             return add(e);
@@ -172,11 +177,10 @@ class SimpleLinkedList<E> {
     }
 
     /**
-     * 方便打印，重写了toString方法
+     * 将链表转换为集合
      * @return
      */
-    @Override
-    public String toString() {
+    public List<E> toList() {
         List<E> list = new ArrayList<>();
         if (first == null) {
             return null;
@@ -189,7 +193,16 @@ class SimpleLinkedList<E> {
             }
             node = node.next;
         }
-        return list.toString();
+        return list;
+    }
+
+    /**
+     * 方便打印，重写了toString方法
+     * @return
+     */
+    @Override
+    public String toString() {
+        return toList().toString();
     }
 
     /**
