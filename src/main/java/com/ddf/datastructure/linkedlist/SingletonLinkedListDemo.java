@@ -16,6 +16,7 @@ public class SingletonLinkedListDemo {
         linkedList.add(random.nextInt(1000));
         linkedList.add(random.nextInt(1000));
         linkedList.add(random.nextInt(1000));
+        System.out.println("===========================测试链表基础功能========================");
         System.out.println("加入前链表内容： " + linkedList.toList());
         int temp = random .nextInt(1000);
         System.out.println("向[0]位加入元素： [" + temp + "]");
@@ -47,6 +48,18 @@ public class SingletonLinkedListDemo {
         System.out.println("链表大小： " + linkedList.size());
         System.out.println("链表第一个元素: " + linkedList.getFirst());
         System.out.println("链表最后一个元素: " + linkedList.getLast());
+        System.out.println("===========================测试链表基础功能========================");
+
+        System.out.println();
+        System.out.println("=====================测试链表反转=========================");
+        SingletonLinkedList<String> convert = new SingletonLinkedList<>();
+        convert.add("aaa");
+        convert.add("bbb");
+        convert.add("ccc");
+        SingletonLinkedList<String> convert1 = convert.convert();
+        System.out.println("原链表： " + convert.toList());
+        System.out.println("反转后: " + convert1.toList());
+        System.out.println("=====================测试链表反转=========================");
     }
 }
 
@@ -161,9 +174,41 @@ class SingletonLinkedList<E> {
 
 
     /**
-     * TODO 链表反转
-     * @param <E>
+     * 翻转链表元素内容
+     * 不知道有没有更好的方法，减少循环次数
+     * @return
      */
+    public SingletonLinkedList<E> convert() {
+
+        if (size == 0) {
+            return null;
+        }
+
+        // 如果只有一个元素，不存在反转，直接返回自身即可
+        if (size == 1) {
+            return this;
+        }
+
+        // 找到last前面的一个元素
+        SingletonLinkedList<E> rtn = new SingletonLinkedList<>();
+        int lastIndex = size;
+        while (true) {
+            Node<E> node = first;
+            // 每次都循环到链表的最后一个元素，因为从first开始循环，所以初始值为1,如果三个元素，从first开始找，只要循环两次node.next即可
+            for (int i = 1; i < lastIndex; i ++) {
+                node = node.next;
+            }
+            rtn.add(node.item);
+            // 找到一个之后，下次循环取的最后一个元素就是本次的上个节点，所以要少一次循环，以此类推，直到循环到first
+            lastIndex --;
+            if (lastIndex == 0) {
+                break;
+            }
+        }
+        return rtn;
+    }
+
+
 
     class Node<E> {
         E item;
