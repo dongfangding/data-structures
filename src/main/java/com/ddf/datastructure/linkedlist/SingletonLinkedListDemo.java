@@ -159,6 +159,12 @@ class SingletonLinkedList<E> {
         return node.item;
     }
 
+
+    /**
+     * TODO 链表反转
+     * @param <E>
+     */
+
     class Node<E> {
         E item;
         Node<E> next;
