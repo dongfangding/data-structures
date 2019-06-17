@@ -38,3 +38,16 @@
 ##### 4.1 数组实现栈
 
 `com.ddf.datastructure.stack.ArrayStackDemo`
+
+##### 4.2 基于栈实现一个简单的计算器
+表达式必须是后缀表达式，暂时未处理将中缀表达式转换为后缀表达式，这只是个简单演示，说明栈的应用
+
+`com.ddf.datastructure.stack.Calculator`
+
+#### 5. 递归
+
+##### 5.1 迷宫问题
+使用递归回溯算法来完成寻找迷宫的路径问题
+
+`com.ddf.datastructure.recursion.Maze`
+
