@@ -39,8 +39,14 @@ public class Maze {
             maze[i][6] = 1;
         }
 
+        // 手动设置除了围墙之外的路障
+        maze[1][3] = 1;
+        maze[2][5] = 1;
         maze[3][1] = 1;
         maze[3][2] = 1;
+        maze[4][5] = 1;
+        maze[5][4] = 1;
+
 
         for (int[] ints : maze) {
             for (int anInt : ints) {
