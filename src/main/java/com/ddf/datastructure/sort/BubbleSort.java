@@ -1,5 +1,7 @@
 package com.ddf.datastructure.sort;
 
+import java.util.Arrays;
+
 /**
  * 冒泡排序
  *
@@ -30,6 +32,15 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         int[] arr = {20, 19, 18, 17, 16, 15, 14, 13};
+        int[] sort = sort(arr);
+        System.out.println("排序前： " + Arrays.toString(arr));
+        System.out.println("排序后： " + Arrays.toString(sort));
+    }
+
+    public static int[] sort(int[] arr) {
+        int[] dest = new int[arr.length];
+        // 不改变原数组
+        System.arraycopy(arr, 0, dest, 0, dest.length);
         int temp;
         int count = 0;
         // 在发生交换的时候会改变该值，在内循环结束时如果该值未改变，则说明没有发生交换，则可以说明数组已经有序了
@@ -37,15 +48,15 @@ public class BubbleSort {
         // 循环数组元素个长度，用来完成所有元素的最终位置的排序，内层循环一遍只可以确定一个元素；而由于确定元素位置是两两比较，
         // 两个元素只需要确定一个元素，最终那个元素的位置自然也是正确的，三个元素只需要两两比较替换两次，所以最终
         // 最外层完成所有元素的定位只需要数组长度 - 1即可
-        for (int i = 0; i < arr.length - 1; i ++) {
+        for (int i = 0; i < dest.length - 1; i ++) {
             // i每增一次，就完成了一个元素的排序，则下一次的元素排序就少确定一次，因为没必要再和之前已经排好序的元素进行比较
             // 因为元素是从前往后确定的，所以j每次还是要初始为0，只是内层少循环已经确定过的元素个数次,这会极大减少循环次数，不减i也可以，多循环就是了
-            for (int j = 0; j < arr.length - 1 - i; j ++) {
+            for (int j = 0; j < dest.length - 1 - i; j ++) {
                 count ++;
-                if (arr[j] > arr[j + 1]) {
-                    temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                if (dest[j] > dest[j + 1]) {
+                    temp = dest[j];
+                    dest[j] = dest[j + 1];
+                    dest[j + 1] = temp;
                     swap = true;
                 }
             }
@@ -56,8 +67,6 @@ public class BubbleSort {
             }
         }
         System.out.println("共循环次数： " + count);
-        for (int i : arr) {
-            System.out.printf("%d ", i);
-        }
+        return dest;
     }
 }
